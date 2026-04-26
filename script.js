@@ -1,6 +1,7 @@
 const round = document.getElementById('round');
 const tree = document.getElementById('tree');
 const playButton = document.getElementById('playButton');
+const resetButton = document.getElementById('resetButton');
 const growButton = document.getElementById('growButton');
 const shrinkButton = document.getElementById('shrinkButton');
 const table = document.getElementById('table');
@@ -77,10 +78,12 @@ function treeIterate(node) {
 }
 
 function playRound() {
-    round.textContent = `${terminator(round_number)} Round`;
     if (tree.firstElementChild.firstElementChild.firstElementChild !== null) {
+        round.textContent = '';
         return;
     }
+
+    round.textContent = `${terminator(round_number)} Round`;
     setTimeout(() => {
         treeIterate(tree.firstElementChild);
         round_number++;
@@ -88,12 +91,40 @@ function playRound() {
     }, 1000);
 }
 
+function resetTree(node) {
+    if (node.children.length === 1) {
+        const img = images[table_index];
+        img.style.filter = '';
+        node.firstElementChild.appendChild(img);
+        table_index++;
+        return;
+    }
+    for (const child of node.children[1].children) {
+        resetTree(child);
+    }
+}
+
+function resetTournament() {
+    round_number = 1;
+    table_index = 0;
+    resetTree(tree.firstElementChild);
+}
+
 playButton.addEventListener('click', (e) => {
-    playRound();
+    if (round.textContent === '') {
+        resetTournament();
+        playRound();
+    }
+});
+
+resetButton.addEventListener('click', (e) => {
+    if (round.textContent === '') {
+        resetTournament();
+    }
 });
 
 growButton.addEventListener('click', (e) => {
-    if (size >= 8) {
+    if (round.textContent !== '' || size >= 8) {
         return;
     }
     size++;
@@ -101,7 +132,7 @@ growButton.addEventListener('click', (e) => {
 });
 
 shrinkButton.addEventListener('click', (e) => {
-    if (size <= 1) {
+    if (round.textContent !== '' || size <= 1) {
         return;
     }
     size--;

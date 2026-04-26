@@ -4,6 +4,7 @@ const playButton = document.getElementById('playButton');
 const resetButton = document.getElementById('resetButton');
 const growButton = document.getElementById('growButton');
 const shrinkButton = document.getElementById('shrinkButton');
+const shuffleButton = document.getElementById('shuffleButton');
 const table = document.getElementById('table');
 
 let round_number = 1;
@@ -19,7 +20,15 @@ const characters = [
     { name: 'Trunks', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Kid%20Trunks%2001.png' },
     { name: 'Krillin', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Krillin.png' },
     { name: 'Yamcha', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Yamcha.png' },
-    { name: 'Tien', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Tien.png' }
+    { name: 'Tien', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Tien.png' },
+    { name: 'Piccolo', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Piccolo.png' },
+    { name: 'Nappa', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Nappa.png' },
+    { name: 'Frieza', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Frieza%2004%20-%20Final%20Form.png' },
+    { name: 'Cell', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Cell%2003%20-%20Perfect%20Form.png' },
+    { name: 'Super Buu', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Super%20Buu%2001.png' },
+    { name: 'Broly', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Broly.png' },
+    { name: 'Bardock', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Bardock.png' },
+    { name: 'Master Roshi', image: 'https://spritedatabase.net/files/ps2/2493/Sprite/CharSelectP1/Master%20Roshi.png' }
 ];
 
 function terminator() {
@@ -137,6 +146,23 @@ shrinkButton.addEventListener('click', (e) => {
     }
     size--;
     tree_update();
+});
+
+shuffleButton.addEventListener('click', (e) => {
+    for (let i = 0; i < images.length; i++) {
+        const i0 = Math.floor(Math.random() * images.length);
+        const i1 = Math.floor(Math.random() * images.length);
+
+        [table.children[i0].children[0].textContent, table.children[i1].children[0].textContent] =
+        [table.children[i1].children[0].textContent, table.children[i0].children[0].textContent];
+        [table.children[i0].children[1].textContent, table.children[i1].children[1].textContent] =
+        [table.children[i1].children[1].textContent, table.children[i0].children[1].textContent];
+
+        images[i0].alt = table.children[i0].children[0].textContent;
+        images[i0].src = table.children[i0].children[1].textContent;
+        images[i1].alt = table.children[i1].children[0].textContent;
+        images[i1].src = table.children[i1].children[1].textContent;
+    }
 });
 
 function tableGenerate(table, depth) {

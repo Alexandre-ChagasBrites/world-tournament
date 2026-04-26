@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>World Tournament</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer="defer"></script>
+    </head>
+    <body>
+        <header>
+            <h1>World Tournament</h1>
+            <h1 id="round"></h1>
+        </header>
+        <main>
+            <h1>Victory</h1>
+            <ul id="tree"></ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="row" colspan="2">
+                            <div style="display: flex; width: 100%;">
+                                <button id="playButton" style="flex-grow: 1;">Play</button>
+                                <button id="growButton">Grow</button>
+                                <button id="shrinkButton">Shrink</button>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Image</th>
+                    </tr>
+                </thead>
+                <tbody id="table"></tbody>
+            </table>
+        </main>
+        <footer>
+        </footer>
+    </body>
+</html>
